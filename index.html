@@ -221,7 +221,7 @@
         const bank = document.getElementById('bankField').value;
 
         // ⚠️【最終對齊】網址記得換成你最新複製的那一串！
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbwqqf_bFzpdUPNbMatxj9LfL-OxvCS08BrPpiGiA2PlMbeU_Hsy8vyCcpsWfYilMkEebw/exec";
         const payLoad = `?p1=${encodeURIComponent(name)}&p2=${encodeURIComponent(phone)}&p3=${encodeURIComponent(lineId)}&p4=${encodeURIComponent(adultNum)}&p5=${encodeURIComponent(childNum)}&p6=${encodeURIComponent(site)}&p7=${encodeURIComponent(invoiceType)}&p8=${encodeURIComponent(invoiceTitle)}&p9=${encodeURIComponent(invoiceTaxId)}&p10=${encodeURIComponent(payDate)}&p11=${encodeURIComponent(payAmount)}&p12=${encodeURIComponent(bank)}`;
 
         fetch(scriptUrl + payLoad, { method: "GET" })
