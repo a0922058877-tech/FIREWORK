@@ -10,9 +10,9 @@
         .header-banner { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; padding: 40px 20px; text-align: center; border-radius: 0 0 20px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
         .card-custom { background: white; border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; }
         .btn-submit { background: linear-gradient(to right, #11998e, #38ef7d); border: none; color: white; font-weight: bold; padding: 15px; font-size: 1.2rem; border-radius: 10px; }
-        .price-display { background-color: #fff9db; border: 2px dashed #fab005; border-radius: 10px; padding: 15px; font-weight: bold; }
         .terms-box { background-color: #faf9f6; border: 1px solid #e6e1da; padding: 20px; border-radius: 10px; }
         .line-btn { background-color: #06C755; color: white; font-weight: bold; padding: 12px 30px; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 20px; }
+        .required-star { color: red; margin-left: 3px; }
     </style>
 </head>
 <body>
@@ -21,82 +21,135 @@
     
     <div class="header-banner my-3">
         <h2 class="fw-bold">2026 淡水仲夏繽紛樂煙火航班</h2>
-        <p class="mb-0">第三梯次（8月23日）限定船班預約登記中心</p>
+        <p class="mb-0">第三梯次（8月23日）限定船班預約登記表</p>
     </div>
 
     <div id="successCard" class="card card-custom p-5 text-center" style="display: none;">
         <div style="font-size: 4rem;" class="mb-3">🎉</div>
         <h3 class="text-success fw-bold mb-3">預約資料已成功送出！</h3>
-        <p class="fs-6">系統已成功將您的資料同步至雲端後台試算表。</p>
-        <p class="fs-6 text-danger fw-bold">【最後一步】請務必點擊下方按鈕加入官方 LINE 告知我們您的「姓名」，核對帳款後才算預約成功！</p>
+        <p class="fs-6">感謝您支持順風航業股份有限公司。</p>
+        <p class="fs-6 text-danger fw-bold">【最後一步】請務必點擊下方按鈕加入官方 LINE 並告知您的「姓名」，待本公司核實入帳回覆後方為預約成功！</p>
         <a href="https://line.me/R/ti/p/%40743LXBRM" target="_blank" class="line-btn">點此加入官方 LINE 帳號</a>
     </div>
 
     <div id="mainContent">
         <div class="card card-custom p-4">
-            <h4 class="fw-bold text-primary mb-3">⚠️ 乘船與預約重要規範（限額680位）</h4>
-            <p class="mb-0 text-muted fs-7">本網頁為順風航業官方預約系統。請先完成匯款後再填寫下方資料，收到官方 LINE 確立通知後方視為預約成功。</p>
+            <h5 class="fw-bold text-primary mb-3">■ 2026淡水仲夏繽紛樂煙火航班說明</h5>
+            <p class="text-muted fs-6 small">
+                本活動採限額預約制。每位300元(未稅)。如需開立發票,另加5%營業稅。<br>
+                完成匯款後請填寫本表單,由本公司確認後,收到本公司官方 LINE 回覆後方為預約成功。<br>
+                預約成立後恕不受理人數變更。如需變更人數,須整筆取消後重新預約。額滿後表單將關閉。<br><br>
+                <strong class="text-danger">‼️ 煙火航班取消與退費政策：</strong><br>
+                ・活動日前7日(含)以前通知取消者,可辦理退費,惟將扣除匯款手續費新臺幣30元。<br>
+                ・活動日前6日內取消、活動當日未到或因個人因素未能參加者,恕無法退費。<br>
+                ・如因天候、政府公告、航行安全考量或其他不可抗力因素致活動取消,將另行公告延期、改期或退費方式。
+            </p>
         </div>
 
-        <div class="card card-custom p-4">
-            <h4 class="fw-bold text-success mb-3">🏦 匯款帳戶資訊</h4>
-            <div class="bg-light p-3 rounded">
-                <p class="mb-1"><strong>銀行：</strong>淡水第一信用合作社－營業部（119）</p>
-                <p class="mb-1"><strong>帳號：</strong>0029-21-210041-0</p>
-                <p class="mb-0"><strong>戶名：</strong>順風航業股份有限公司</p>
+        <form id="signupForm">
+            <div class="card card-custom p-4">
+                <h4 class="fw-bold mb-3 text-secondary">👤 聯絡人資料</h4>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">聯絡人姓名<span class="required-star">*</span></label>
+                    <input type="text" id="nameField" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">聯絡電話<span class="required-star">*</span></label>
+                    <input type="tel" id="phoneField" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">LINE ID (請確實填寫,避免收不到通知)<span class="required-star">*</span></label>
+                    <input type="text" id="lineIdField" class="form-control" placeholder="請輸入您的 LINE ID" required>
+                </div>
             </div>
-        </div>
 
-        <div class="card card-custom p-4 mb-5">
-            <h4 class="fw-bold mb-4 text-center">📝 填寫預約名單</h4>
-            <form id="signupForm">
-                <div class="mb-3">
-                    <label class="form-label fw-bold">聯絡人姓名</label>
-                    <input type="text" id="nameField" class="form-control" placeholder="請輸入姓名" required>
+            <div class="card card-custom p-4">
+                <h4 class="fw-bold mb-3 text-secondary">🚢 活動報名資訊</h4>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label class="form-label fw-bold text-primary">一般全票人數<span class="required-star">*</span></label>
+                        <input type="number" id="adultNumField" class="form-control" min="0" value="1" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label fw-bold text-success">3歲以下幼童人數(免票)<span class="required-star">*</span></label>
+                        <input type="number" id="childNumField" class="form-control" min="0" value="0" required>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold">聯絡電話</label>
-                    <input type="tel" id="phoneField" class="form-control" placeholder="例如：0912345678" required>
+                    <small class="text-muted">* 註：未滿3足歲以下之幼童無須購票、不佔位，活動日現場須出示健保卡確認。</small>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold">LINE ID</label>
-                    <input type="text" id="lineIdField" class="form-control" placeholder="請填寫您的 LINE ID" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold">乘船地點</label>
+                    <label class="form-label fw-bold">乘船地點(上船地點)<span class="required-star">*</span></label>
                     <div>
                         <input type="radio" name="site" id="site1" value="淡水" checked> <label for="site1" class="me-3">淡水</label>
                         <input type="radio" name="site" id="site2" value="八里"> <label for="site2">八里</label>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label class="form-label fw-bold text-primary">一般全票人數</label>
-                        <input type="number" id="numAdult" class="form-control" value="1" min="0" required>
+            </div>
+
+            <div class="card card-custom p-4">
+                <h4 class="fw-bold mb-3 text-secondary">🧾 發票資訊 (開立發票均需要外加票價5%稅額)</h4>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">是否需要發票<span class="required-star">*</span></label>
+                    <div>
+                        <input type="radio" name="invoiceType" id="inv1" value="不需要" checked onclick="toggleInvoice(false)"> <label for="inv1" class="me-3">不需要</label>
+                        <input type="radio" name="invoiceType" id="inv2" value="二聯式發票" onclick="toggleInvoice(true)"> <label for="inv2" class="me-3">二聯式發票</label>
+                        <input type="radio" name="invoiceType" id="inv3" value="三聯式發票" onclick="toggleInvoice(true)"> <label for="inv3">三聯式發票</label>
                     </div>
-                    <div class="col-6">
-                        <label class="form-label fw-bold text-success">幼童人數(3歲以下)</label>
-                        <input type="number" id="numChild" class="form-control" value="0" min="0" required>
+                </div>
+                <div id="invoiceFields" style="display: none;">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">發票抬頭</label>
+                        <input type="text" id="invoiceTitleField" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">統一編號(三聯式發票將另外提供電子檔供貴賓下載)</label>
+                        <input type="text" id="invoiceTaxIdField" class="form-control">
                     </div>
                 </div>
-                <div class="price-display mb-4 text-center">
-                    <span class="fs-5 text-secondary">應匯款總金額：</span>
-                    <span class="fs-2 text-danger" id="totalPriceDisplay">NT$ 300</span> 元
+            </div>
+
+            <div class="card card-custom p-4">
+                <h4 class="fw-bold mb-3 text-secondary">🏦 匯款資料</h4>
+                <div class="bg-light p-3 rounded mb-3 small">
+                    <strong>銀行名稱：</strong>淡水第一信用合作社-營業部 (代號 119)<br>
+                    <strong>匯款帳號：</strong>0029-21-210041-0<br>
+                    <strong>戶名：</strong>順風航業股份有限公司<br>
+                    <strong>活動費用：</strong>每位300元(未稅)，需發票另加5%營業稅
                 </div>
-                <div class="mb-4">
-                    <label class="form-label fw-bold text-danger">轉帳帳號後五碼</label>
-                    <input type="text" id="bankField" class="form-control" placeholder="請輸入後5碼" required>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">匯款日期<span class="required-star">*</span></label>
+                    <input type="date" id="payDateField" class="form-control" required>
                 </div>
-                <div class="terms-box mb-4">
-                    <h5 class="fw-bold mb-3">★ 本人已確認並同意：</h5>
-                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c1" required><label class="form-check-label" for="c1">已確認全票每位300元（未稅）</label></div>
-                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c3" required><label class="form-check-label" for="c3">取消與退費機制等本航業所有公告規定</label></div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">匯款金額<span class="required-star">*</span></label>
+                    <input type="number" id="payAmountField" class="form-control" placeholder="請輸入實際匯款總額" required>
                 </div>
-                <div class="d-grid">
-                    <button type="submit" id="submitBtn" class="btn btn-submit btn-lg">確認已完成匯款，送出預約資料</button>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">匯款帳號後五碼<span class="required-star">*</span></label>
+                    <input type="text" id="bankField" class="form-control" maxlength="5" placeholder="請輸入後5碼" required>
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <div class="card card-custom p-4">
+                <h4 class="fw-bold mb-3 text-danger">✅ 預約規範確認 (請詳細閱讀同意後再行勾選)</h4>
+                <h5 class="fw-bold mb-3 fs-6">本人已確認以下事項：</h5>
+                <div class="terms-box">
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c1" required><label class="form-check-label small" for="c1">已確認活動票價每位300元(未稅)</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c2" required><label class="form-check-label small" for="c2">已確認發票另加5%營業稅</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c3" required><label class="form-check-label small" for="c3">已確認完成匯款不代表預約成功</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c4" required><label class="form-check-label small" for="c4">已確認須待順風航業核實入帳</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c5" required><label class="form-check-label small" for="c5">已確認需要收到順風航業官方LINE通知後方成立預約</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c6" required><label class="form-check-label small" for="c6">已確認預約成立後不得異動人數</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c7" required><label class="form-check-label small" for="c7">已確認取消後不保留名額</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input check-group" type="checkbox" id="c8" required><label class="form-check-label small" for="c8">已確認額滿即停止受理</label></div>
+                </div>
+            </div>
+
+            <div class="d-grid mb-5">
+                <button type="submit" id="submitBtn" class="btn btn-submit btn-lg">提交登記表</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -106,53 +159,46 @@
     const successCard = document.getElementById('successCard');
     const submitBtn = document.getElementById('submitBtn');
 
+    function toggleInvoice(show) {
+        document.getElementById('invoiceFields').style.display = show ? 'block' : 'none';
+        document.getElementById('invoiceTitleField').required = show;
+    }
+
     form.addEventListener('submit', function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
         
         submitBtn.disabled = true;
-        submitBtn.innerText = "資料安全同步中...";
+        submitBtn.innerText = "正在安全同步雲端資料...";
 
         const name = document.getElementById('nameField').value;
         const phone = document.getElementById('phoneField').value;
         const lineId = document.getElementById('lineIdField').value;
+        const adultNum = document.getElementById('adultNumField').value;
+        const childNum = document.getElementById('childNumField').value;
         const site = document.querySelector('input[name="site"]:checked').value;
-        const adult = document.getElementById('numAdult').value;
-        const child = document.getElementById('numChild').value;
-        const price = document.getElementById('totalPriceDisplay').textContent;
+        const invoiceType = document.querySelector('input[name="invoiceType"]:checked').value;
+        const invoiceTitle = document.getElementById('invoiceTitleField').value || "無";
+        const invoiceTaxId = document.getElementById('invoiceTaxIdField').value || "無";
+        const payDate = document.getElementById('payDateField').value;
+        const payAmount = document.getElementById('payAmountField').value;
         const bank = document.getElementById('bankField').value;
 
         const scriptUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
-        const payLoad = `?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&lineName=${encodeURIComponent(lineId)}&site=${encodeURIComponent(site)}&adult=${encodeURIComponent(adult)}&child=${encodeURIComponent(child)}&price=${encodeURIComponent(price)}&bank=${encodeURIComponent(bank)}`;
+        const payLoad = `?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&lineId=${encodeURIComponent(lineId)}&adultNum=${encodeURIComponent(adultNum)}&childNum=${encodeURIComponent(childNum)}&site=${encodeURIComponent(site)}&invoiceType=${encodeURIComponent(invoiceType)}&invoiceTitle=${encodeURIComponent(invoiceTitle)}&invoiceTaxId=${encodeURIComponent(invoiceTaxId)}&payDate=${encodeURIComponent(payDate)}&payAmount=${encodeURIComponent(payAmount)}&bank=${encodeURIComponent(bank)}`;
 
-        // 💡 這次改用 AJAX 先去問後台滿了沒
+        mainContent.style.display = 'none';
+        successCard.style.display = 'block';
+        window.scrollTo(0, 0);
+
         fetch(scriptUrl + payLoad, { method: "POST" })
         .then(res => res.json())
         .then(data => {
             if (data.result === "full") {
-                // 如果後台回傳滿了，跳出警告，不給報名
-                alert("【重要通知】本場次 680 位名額已全數額滿，停止受理預約登記！如有疑問請洽官方 LINE。");
-                submitBtn.disabled = false;
-                submitBtn.innerText = "確認已完成匯款，送出預約資料";
-            } else {
-                // 成功寫入，才原地變換畫面
-                mainContent.style.display = 'none';
-                successCard.style.display = 'block';
-                window.scrollTo(0, 0);
+                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次 680 位名額已全數額滿，系統停止受理預約登記！</p></div></div>`;
             }
         })
-        .catch(err => {
-            // 萬一網路斷線或跨網域被瀏覽器阻擋，最保險的做法是依然幫他帶到成功畫面，避免民眾重複瘋狂點擊
-            mainContent.style.display = 'none';
-            successCard.style.display = 'block';
-            window.scrollTo(0, 0);
-        });
+        .catch(err => console.log("傳輸中..."));
     });
-
-    function calculate() {
-        const adult = parseInt(document.getElementById('numAdult').value) || 0;
-        document.getElementById('totalPriceDisplay').textContent = (adult * 300).toLocaleString();
-    }
-    document.getElementById('numAdult').addEventListener('input', calculate);
 </script>
 </body>
 </html>
