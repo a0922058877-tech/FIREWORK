@@ -85,4 +85,77 @@
         <p class="mb-0 opacity-90">第三梯次（8月23日）限定船班預約登記</p>
     </div>
 
-    <div id="successCard" class="card card-
+    <div id="successCard" class="card card-custom p-5 text-center" style="display: none;">
+        <div style="font-size: 4rem;" class="mb-3">🎉</div>
+        <h3 class="text-success fw-bold mb-3">預約登記資料已成功送出！</h3>
+        <p class="fs-6 text-muted">感謝您的報名。我們已經在後台為您登記名額。</p>
+        <p class="fs-6 text-danger fw-bold">【最後一步】請務必點擊下方按鈕加入官方 LINE 回報您的「LINE 顯示名稱」，核對帳款後才算預約成功！</p>
+        <a href="https://line.me/R/ti/p/%40743LXBRM" target="_blank" class="line-btn">
+            點此加入官方 LINE 回報
+        </a>
+    </div>
+
+    <div id="mainContent">
+        <div class="card card-custom p-4">
+            <h4 class="fw-bold text-primary mb-3">⚠️ 乘船與預約重要規範</h4>
+            <p>本活動採<strong>限額 680 位</strong>預約登記制，額滿系統將立即自動關閉。</p>
+            <p class="text-danger-custom">請務必注意：送出表單「不代表」預約成功！</p>
+            <p class="fs-7 text-muted">填表前請確認已完成匯款。本公司（順風航業）核實入帳後，將統一透過官方 LINE（@743LXBRM）發送確認通知，收到通知才視為預約成立。</p>
+            <hr>
+            <h5 class="fw-bold">🚨 取消與退費機制</h5>
+            <ul class="ps-3 fs-7 text-muted">
+                <li><strong>活動日前 7 日（含）以前</strong>通知取消者：可辦理退費，惟退款金額將扣除轉帳手續費新臺幣 30 元。</li>
+                <li><strong>活動日前 6 日內、當日未到或因個人因素未能參加者</strong>：恕不予退費。</li>
+                <li>如遇天候不佳、政府公告、航行安全考量等不可抗力因素致活動取消，本公司將另行公告延期或退費辦法。</li>
+            </ul>
+        </div>
+
+        <div class="card card-custom p-4">
+            <h4 class="fw-bold text-success mb-3">🏦 順風航業 匯款帳戶資訊</h4>
+            <div class="bg-light p-3 rounded mb-2">
+                <p class="mb-1"><strong>銀行名稱：</strong>淡水第一信用合作社－營業部（代碼 119）</p>
+                <p class="mb-1"><strong>匯款帳號：</strong>0029-21-210041-0</p>
+                <p class="mb-0"><strong>戶名：</strong>順風航業股份有限公司</p>
+            </div>
+            <small class="text-muted">* 請先完成匯款後，再填寫下方表單送出登記。</small>
+        </div>
+
+        <div class="card card-custom p-4 mb-5">
+            <h4 class="fw-bold mb-4 text-center">📝 填寫預約資料</h4>
+            
+            <form id="signupForm">
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">聯絡人姓名</label>
+                    <input type="text" id="nameField" name="entry.1691350849" class="form-control" placeholder="請輸入您的真實姓名" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">聯絡電話</label>
+                    <input type="tel" id="phoneField" name="entry.1465223727" class="form-control" placeholder="例如：0912345678" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">LINE 顯示名稱</label>
+                    <input type="text" id="lineField" name="entry.1748366914" class="form-control" placeholder="請填寫精準，以便後台核對" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">乘船地點</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="entry.1834947915" id="site1" value="淡水" checked>
+                            <label class="form-check-label" for="site1">淡水</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="entry.1834947915" id="site2" value="八里">
+                            <label class="form-check-label" for="site2">八里</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label class="form-label fw-bold text-primary">一般人數（全票）</label>
+                        <input type="number" id="numAdult" name="entry.1378393527" class="form-control" value="1" min="0" required>
+                        <div class="form-text">每位 NT$ 300 元</div>
