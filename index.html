@@ -220,17 +220,20 @@
         const payAmount = document.getElementById('payAmountField').value;
         const bank = document.getElementById('bankField').value;
 
-        // ⚠️ 最新部署網址請貼在下方引號中
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbzsHa8SDzVr9gugOwXp92AtIaHZKUP52RuUetpWcWaiH4cvMBStiZCAKT11KiJLhoJBOA/exec";
+        // 💡 關鍵安全微調：自動將網址末端的問號或斜線做地毯式清理，避免重複拼接
+        let rawUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
+        if (rawUrl.endsWith('/')) rawUrl = rawUrl.slice(0, -1);
+        if (rawUrl.endsWith('?')) rawUrl = rawUrl.slice(0, -1);
+        const scriptUrl = rawUrl;
+
         const payLoad = `?p1=${encodeURIComponent(name)}&p2=${encodeURIComponent(phone)}&p3=${encodeURIComponent(lineId)}&p4=${encodeURIComponent(adultNum)}&p5=${encodeURIComponent(childNum)}&p6=${encodeURIComponent(site)}&p7=${encodeURIComponent(invoiceType)}&p8=${encodeURIComponent(invoiceTitle)}&p9=${encodeURIComponent(invoiceTaxId)}&p10=${encodeURIComponent(payDate)}&p11=${encodeURIComponent(payAmount)}&p12=${encodeURIComponent(bank)}`;
 
         fetch(scriptUrl + payLoad, { method: "GET" })
         .then(res => res.json())
         .then(data => {
             if (data.result === "full") {
-                // 💡 修正：當後台回傳有條理的 full 時，前台網頁才換上紅色的額滿畫面
                 alert("【重要通知】本場次 680 位名額已全數額滿，系統停止受理預約登記！");
-                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次名額已全數額滿，系統已自動關閉受理！</p></div></div>`;
+                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次 680 位名額已全數額滿，系統已自動關閉受理！</p></div></div>`;
             } else if (data.result === "success") {
                 mainContent.style.display = 'none';
                 successCard.style.display = 'block';
@@ -242,7 +245,6 @@
             }
         })
         .catch(err => {
-            // 真正斷線才走這裡
             alert("網路連線異常，請重新嘗試送出！");
             submitBtn.disabled = false;
             submitBtn.innerText = "提交登記表";
