@@ -220,33 +220,28 @@
         const payAmount = document.getElementById('payAmountField').value;
         const bank = document.getElementById('bankField').value;
 
-        // ⚠️【最重要的步驟】請把下面這行引號裡面的網址，換成你最新「新部署」複製的那串網址！
-        const scriptUrl = "https://script.google.com/macros/s/AKfycby6AaOGdGsIFfQ4akJ3qoQFvBWuUdv8uwEWrjkNwITRkiOU34YzuY5pVg_ZjpqS23bwEg/exec";
-        
-        // 💡 徹底改用 GET 網址直通車傳送，完全繞過瀏覽器的 POST 跨網域阻擋
+        // ⚠️【最終對齊】網址記得換成你最新複製的那一串！
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
         const payLoad = `?p1=${encodeURIComponent(name)}&p2=${encodeURIComponent(phone)}&p3=${encodeURIComponent(lineId)}&p4=${encodeURIComponent(adultNum)}&p5=${encodeURIComponent(childNum)}&p6=${encodeURIComponent(site)}&p7=${encodeURIComponent(invoiceType)}&p8=${encodeURIComponent(invoiceTitle)}&p9=${encodeURIComponent(invoiceTaxId)}&p10=${encodeURIComponent(payDate)}&p11=${encodeURIComponent(payAmount)}&p12=${encodeURIComponent(bank)}`;
 
-        // ⚡ 這次我們嚴格把關：必須等 Google 回傳答案，確定沒額滿才換頁！
         fetch(scriptUrl + payLoad, { method: "GET" })
         .then(res => res.json())
         .then(data => {
             if (data.result === "full") {
-                // 如果後台大門回傳「full」，直接強制鎖死，不給換頁！
-                alert("【重要通知】本場次 680 位名額已全數額滿，系統停止受理預約登記！如有疑問請洽官方 LINE。");
-                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次名額已全數額滿，系統已自動關閉受理！</p></div></div>`;
+                alert("【重要通知】本場次 680 位名額已全數額滿，系統停止受理預約登記！");
+                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次 680 位名額已全數額滿，系統已自動關閉受理！</p></div></div>`;
             } else if (data.result === "success") {
-                // 只有確定寫入試算表成功，才放行顯示成功卡片
                 mainContent.style.display = 'none';
                 successCard.style.display = 'block';
                 window.scrollTo(0, 0);
             } else {
-                alert("系統伺服器忙碌中，請重新點擊送出一次！");
+                alert("系統伺服器忙碌中，請重新點擊送出！");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "提交登記表";
             }
         })
         .catch(err => {
-            alert("網路連線逾時，或後台認證設定不正確，請重新嘗試送出！");
+            alert("網路連線異常，請重新嘗試送出！");
             submitBtn.disabled = false;
             submitBtn.innerText = "提交登記表";
         });
