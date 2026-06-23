@@ -19,6 +19,7 @@
 </head>
 <body>
 
+<!-- 初始化檢查畫面 -->
 <div id="loadingOverlay">
     <div class="spinner-border text-primary mb-3" role="status"></div>
     <div class="fw-bold text-secondary">正在確認安全連線與賸餘名額...</div>
@@ -28,9 +29,10 @@
     
     <div class="header-banner my-3">
         <h2 class="fw-bold">2026 淡水仲夏繽紛樂煙火航班</h2>
-        <p class="mb-0">第三梯次（8月23日）限定船班預約登記表</p>
+        <p class="mb-0">限定船班預約登記表</p>
     </div>
 
+    <!-- 🚫 額滿畫面 -->
     <div id="fullCard" class="card card-custom p-5 text-center" style="display: none;">
         <div style="font-size: 4rem;" class="mb-3">❌</div>
         <h3 class="text-danger fw-bold mb-3">【額滿公告】</h3>
@@ -38,6 +40,7 @@
         <p class="fs-6 text-secondary">感謝您對順風航業的支持與愛護。</p>
     </div>
 
+    <!-- 🎉 成功畫面 -->
     <div id="successCard" class="card card-custom p-5 text-center" style="display: none;">
         <div style="font-size: 4rem;" class="mb-3">🎉</div>
         <h3 class="text-success fw-bold mb-3">預約資料已成功送出！</h3>
@@ -46,6 +49,7 @@
         <a href="https://line.me/R/ti/p/%40743LXBRM" target="_blank" class="line-btn">點此加入官方 LINE 帳號</a>
     </div>
 
+    <!-- 主表單區 -->
     <div id="mainContent" style="display: none;">
         <div class="card card-custom p-4">
             <h5 class="fw-bold text-primary mb-3">■ 2026淡水仲夏繽紛樂煙火航班說明</h5>
@@ -55,12 +59,13 @@
                 預約成立後恕不受理人數變更。如需變更人數,須整筆取消後重新預約。額滿後表單將關閉。<br><br>
                 <strong class="text-danger">‼️ 煙火航班取消與退費政策：</strong><br>
                 ・活動日前7日(含)以前通知取消者,可辦理退費,惟將扣除匯款手續費新臺幣30元。<br>
-                ・活動日前6日內取消、活動當日未到或因個人因素未能參加者,恕無法退費。<br>
+                ・活動日前6日內取消、活動當日未到或因個人因素未能感謝者,恕無法退費。<br>
                 ・如因天候、政府公告、航行安全考量或其他不可抗力因素致活動取消,將另行公告延期、改期或退費方式。
             </p>
         </div>
 
         <form id="signupForm">
+            <!-- 聯絡人資料 -->
             <div class="card card-custom p-4">
                 <h4 class="fw-bold mb-3 text-secondary">👤 聯絡人資料</h4>
                 <div class="mb-3">
@@ -72,11 +77,13 @@
                     <input type="tel" id="phoneField" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold">LINE ID (請確實填寫,避免收不到通知)<span class="required-star">*</span></label>
-                    <input type="text" id="lineIdField" class="form-control" placeholder="請輸入您的 LINE ID" required>
+                    <!-- 💡 這裡成功改為 LINE名稱提示 -->
+                    <label class="form-label fw-bold">LINE名稱 (請確實填寫您的 LINE 暱稱)<span class="required-star">*</span></label>
+                    <input type="text" id="lineNameField" class="form-control" placeholder="請輸入您的 LINE 顯示名稱" required>
                 </div>
             </div>
 
+            <!-- 活動報名資訊 -->
             <div class="card card-custom p-4">
                 <h4 class="fw-bold mb-3 text-secondary">🚢 活動報名資訊</h4>
                 <div class="row mb-3">
@@ -103,6 +110,7 @@
                 </div>
             </div>
 
+            <!-- 發票資訊 -->
             <div class="card card-custom p-4">
                 <h4 class="fw-bold mb-3 text-secondary">🧾 發票資訊 (開立發票均需要外加票價5%稅額)</h4>
                 <div class="mb-3">
@@ -125,12 +133,14 @@
                 </div>
             </div>
 
+            <!-- 自動計算金額顯示區 -->
             <div class="card card-custom p-4 price-display text-center">
                 <span class="fs-5 text-secondary">應匯款總金額：</span>
                 <span class="fs-2 text-danger" id="totalPriceDisplay">NT$ 300</span> 元
                 <div class="fs-7 text-muted mt-1" id="totalCountNote">（計算：全票 1 人，幼童 0 人）</div>
             </div>
 
+            <!-- 匯款資料 -->
             <div class="card card-custom p-4">
                 <h4 class="fw-bold mb-3 text-secondary">🏦 匯款資料</h4>
                 <div class="bg-light p-3 rounded mb-3 small">
@@ -153,6 +163,7 @@
                 </div>
             </div>
 
+            <!-- 預約規範確認 -->
             <div class="card card-custom p-4">
                 <h4 class="fw-bold mb-3 text-danger">✅ 預約規範確認 (請詳細閱讀同意後再行勾選)</h4>
                 <h5 class="fw-bold mb-3 fs-6">本人已確認以下事項：</h5>
@@ -176,8 +187,8 @@
 </div>
 
 <script>
-    // ⚠️ 請在此處貼上您最新部署的 Google Script URL
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbxgIY1Qll74CwEH9z7JfnwHi4gLiJ-Ac8JQWv3BlQ7iGyG8kyWQoJUWwlqYgYVmYABB6A/exec";
+    // ⚠️ 請在下方換上最新部署產生的 Google Script URL 網址
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbyPqoi0rqG1QNSnLodKoWcdmJTjlirAvrXfaufF2eXapvR1a9RiotrndQzt9cB6pkqGUg/exec";
 
     const form = document.getElementById('signupForm');
     const mainContent = document.getElementById('mainContent');
@@ -191,20 +202,19 @@
     const totalPriceDisplay = document.getElementById('totalPriceDisplay');
     const totalCountNote = document.getElementById('totalCountNote');
 
-    // 🚀 【核心防線】一進網頁，立刻悄悄向後台調閱狀態
+    // 進網頁即時詢問後台人數狀態
     window.addEventListener('DOMContentLoaded', () => {
         fetch(`${scriptUrl}?checkStatus=true`)
         .then(res => res.text())
         .then(text => {
             loadingOverlay.style.display = 'none';
             if (text.trim() === "FULL") {
-                fullCard.style.display = 'block'; // 顯示額滿，不給填表
+                fullCard.style.display = 'block';
             } else {
-                mainContent.style.display = 'block'; // 正常開放填表
+                mainContent.style.display = 'block';
             }
         })
         .catch(() => {
-            // 萬一遇到安全性阻擋，採取安全寬鬆模式：直接開啟表單讓他們填
             loadingOverlay.style.display = 'none';
             mainContent.style.display = 'block';
         });
@@ -243,7 +253,7 @@
 
         const name = document.getElementById('nameField').value;
         const phone = document.getElementById('phoneField').value;
-        const lineId = document.getElementById('lineIdField').value;
+        const lineName = document.getElementById('lineNameField').value; // 💡 抓取 LINE 名稱
         const adultNum = adultNumField.value;
         const childNum = childNumField.value;
         const site = document.querySelector('input[name="site"]:checked').value;
@@ -254,9 +264,8 @@
         const payAmount = document.getElementById('payAmountField').value;
         const bank = document.getElementById('bankField').value;
 
-        const payLoad = `?p1=${encodeURIComponent(name)}&p2=${encodeURIComponent(phone)}&p3=${encodeURIComponent(lineId)}&p4=${encodeURIComponent(adultNum)}&p5=${encodeURIComponent(childNum)}&p6=${encodeURIComponent(site)}&p7=${encodeURIComponent(invoiceType)}&p8=${encodeURIComponent(invoiceTitle)}&p9=${encodeURIComponent(invoiceTaxId)}&p10=${encodeURIComponent(payDate)}&p11=${encodeURIComponent(payAmount)}&p12=${encodeURIComponent(bank)}`;
+        const payLoad = `?p1=${encodeURIComponent(name)}&p2=${encodeURIComponent(phone)}&p3=${encodeURIComponent(lineName)}&p4=${encodeURIComponent(adultNum)}&p5=${encodeURIComponent(childNum)}&p6=${encodeURIComponent(site)}&p7=${encodeURIComponent(invoiceType)}&p8=${encodeURIComponent(invoiceTitle)}&p9=${encodeURIComponent(invoiceTaxId)}&p10=${encodeURIComponent(payDate)}&p11=${encodeURIComponent(payAmount)}&p12=${encodeURIComponent(bank)}`;
 
-        // 送出時改回一般模式（因為這時後台有可能會回傳 FULL）
         fetch(scriptUrl + payLoad)
         .then(res => res.text())
         .then(text => {
@@ -271,7 +280,6 @@
             }
         })
         .catch(() => {
-            // 防火牆防線：如果是因為 CORS 判定異常，就預設成功（後台一樣會默默寫入或阻擋）
             mainContent.style.display = 'none';
             successCard.style.display = 'block';
             window.scrollTo(0, 0);
