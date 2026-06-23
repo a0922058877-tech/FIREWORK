@@ -202,31 +202,35 @@
         radio.addEventListener('change', calculateMoney);
     });
 
-    // 💡 修正對齊的發送邏輯
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
         submitBtn.disabled = true;
         submitBtn.innerText = "正在安全同步雲端資料...";
 
-        const name = document.getElementById('nameField').value;
-        const phone = document.getElementById('phoneField').value;
-        const lineId = document.getElementById('lineIdField').value;
-        const adultNum = adultNumField.value;
-        const childNum = childNumField.value;
-        const site = document.querySelector('input[name="site"]:checked').value;
-        const invoiceType = document.querySelector('input[name="invoiceType"]:checked').value;
-        const invoiceTitle = document.getElementById('invoiceTitleField').value || "無";
-        const invoiceTaxId = document.getElementById('invoiceTaxIdField').value || "無";
-        const payDate = document.getElementById('payDateField').value;
-        const payAmount = document.getElementById('payAmountField').value;
-        const bank = document.getElementById('bankField').value;
+        // 💡 物理綁定：直接將中文名稱作為網址封包的變數送出
+        const data = {
+            "聯絡人姓名": document.getElementById('nameField').value,
+            "聯絡電話": document.getElementById('phoneField').value,
+            "LINE_ID": document.getElementById('lineIdField').value,
+            "一般全票人數": adultNumField.value,
+            "幼童人數": childNumField.value,
+            "乘船地點": document.querySelector('input[name="site"]:checked').value,
+            "發票類型": document.querySelector('input[name="invoiceType"]:checked').value,
+            "發票抬頭": document.getElementById('invoiceTitleField').value || "無",
+            "統一編號": document.getElementById('invoiceTaxIdField').value || "無",
+            "匯款日期": document.getElementById('payDateField').value,
+            "匯款金額": document.getElementById('payAmountField').value,
+            "後五碼": document.getElementById('bankField').value
+        };
 
-        // 雲端後台接收端
         const scriptUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
         
-        // 💡 這裡的封包英文與後台 Apps Script 達到 100% 絕對對齊
-        const payLoad = `?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&lineId=${encodeURIComponent(lineId)}&adultNum=${encodeURIComponent(adultNum)}&childNum=${encodeURIComponent(childNum)}&site=${encodeURIComponent(site)}&invoiceType=${encodeURIComponent(invoiceType)}&invoiceTitle=${encodeURIComponent(invoiceTitle)}&invoiceTaxId=${encodeURIComponent(invoiceTaxId)}&payDate=${encodeURIComponent(payDate)}&payAmount=${encodeURIComponent(payAmount)}&bank=${encodeURIComponent(bank)}`;
+        // 將中文字元安全打包成傳輸網址
+        let payLoad = "?";
+        for (let key in data) {
+            payLoad += `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}&`;
+        }
 
         mainContent.style.display = 'none';
         successCard.style.display = 'block';
@@ -239,7 +243,7 @@
                 document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次 680 位名額已全數額滿，系統停止受理預約登記！</p></div></div>`;
             }
         })
-        .catch(err => console.log("傳輸處理中..."));
+        .catch(err => console.log("背景同步處理中"));
     });
 
     calculateMoney();
