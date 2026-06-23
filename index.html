@@ -208,7 +208,6 @@
         submitBtn.disabled = true;
         submitBtn.innerText = "正在安全同步雲端資料...";
 
-        // 💡 終極修正：改用絕不變形的純英文數字封包代號傳輸
         const name = document.getElementById('nameField').value;
         const phone = document.getElementById('phoneField').value;
         const lineId = document.getElementById('lineIdField').value;
@@ -222,9 +221,9 @@
         const payAmount = document.getElementById('payAmountField').value;
         const bank = document.getElementById('bankField').value;
 
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
+        // ⚠️【最關鍵的地方】請把下面這行引號裡面的網址，換成你剛剛複製的最新網址！
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbxKpu2IGPcHtf1m3MBaRR_Z_u2h8jmE5cgGfYxXgjN187koF3MoJDhHDm2gtk0Dy-yf-Q/exec";
         
-        // 💡 一對一死鎖對齊：p1~p12 對應後台接收順序
         const payLoad = `?p1=${encodeURIComponent(name)}&p2=${encodeURIComponent(phone)}&p3=${encodeURIComponent(lineId)}&p4=${encodeURIComponent(adultNum)}&p5=${encodeURIComponent(childNum)}&p6=${encodeURIComponent(site)}&p7=${encodeURIComponent(invoiceType)}&p8=${encodeURIComponent(invoiceTitle)}&p9=${encodeURIComponent(invoiceTaxId)}&p10=${encodeURIComponent(payDate)}&p11=${encodeURIComponent(payAmount)}&p12=${encodeURIComponent(bank)}`;
 
         mainContent.style.display = 'none';
