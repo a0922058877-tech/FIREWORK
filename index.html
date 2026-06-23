@@ -173,42 +173,36 @@
     const totalPriceDisplay = document.getElementById('totalPriceDisplay');
     const totalCountNote = document.getElementById('totalCountNote');
 
-    // 💡 核心自動算錢機邏輯
     function calculateMoney() {
         const adultCount = parseInt(adultNumField.value) || 0;
         const childCount = parseInt(childNumField.value) || 0;
         const invoiceType = document.querySelector('input[name="invoiceType"]:checked').value;
 
-        // 幼童 0 元，只有全票要 300 元
         let basePrice = adultCount * 300;
         let finalPrice = basePrice;
 
-        // 選擇需要發票就自動乘以 1.05 (稅金 5%)
         if (invoiceType === '二聯式發票' || invoiceType === '三聯式發票') {
-            finalPrice = Math.round(basePrice * 1.05); // 四捨五入
+            finalPrice = Math.round(basePrice * 1.05);
         }
 
-        // 即時渲染到畫面上
         totalPriceDisplay.textContent = 'NT$ ' + finalPrice.toLocaleString();
         totalCountNote.textContent = `（計算：全票 ${adultCount} 人 × $300，幼童 ${childCount} 人 × $0）`;
     }
 
-    // 監聽所有會引發金額變動的欄位
     adultNumField.addEventListener('input', calculateMoney);
     childNumField.addEventListener('input', calculateMoney);
 
     function toggleInvoice(show) {
         document.getElementById('invoiceFields').style.display = show ? 'block' : 'none';
         document.getElementById('invoiceTitleField').required = show;
-        calculateMoney(); // 發票類型切換時重新算錢
+        calculateMoney();
     }
 
-    // 監聽發票單選按鈕的切換
     document.getElementsByName('invoiceType').forEach(radio => {
         radio.addEventListener('change', calculateMoney);
     });
 
-    // 表單提交邏輯
+    // 💡 修正對齊的發送邏輯
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -228,7 +222,10 @@
         const payAmount = document.getElementById('payAmountField').value;
         const bank = document.getElementById('bankField').value;
 
+        // 雲端後台接收端
         const scriptUrl = "https://script.google.com/macros/s/AKfycbxmYroWGXX-VIZYhmuFay_3_cxjKNvdHLYGTLFxSJxohoMJAlPYudA5H2O1pPbnbmEWug/exec";
+        
+        // 💡 這裡的封包英文與後台 Apps Script 達到 100% 絕對對齊
         const payLoad = `?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&lineId=${encodeURIComponent(lineId)}&adultNum=${encodeURIComponent(adultNum)}&childNum=${encodeURIComponent(childNum)}&site=${encodeURIComponent(site)}&invoiceType=${encodeURIComponent(invoiceType)}&invoiceTitle=${encodeURIComponent(invoiceTitle)}&invoiceTaxId=${encodeURIComponent(invoiceTaxId)}&payDate=${encodeURIComponent(payDate)}&payAmount=${encodeURIComponent(payAmount)}&bank=${encodeURIComponent(bank)}`;
 
         mainContent.style.display = 'none';
@@ -242,10 +239,9 @@
                 document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次 680 位名額已全數額滿，系統停止受理預約登記！</p></div></div>`;
             }
         })
-        .catch(err => console.log("傳輸中..."));
+        .catch(err => console.log("傳輸處理中..."));
     });
 
-    // 初始化執行一次計算
     calculateMoney();
 </script>
 </body>
