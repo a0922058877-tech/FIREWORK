@@ -230,7 +230,7 @@
             if (data.result === "full") {
                 // 💡 修正：當後台回傳有條理的 full 時，前台網頁才換上紅色的額滿畫面
                 alert("【重要通知】本場次 680 位名額已全數額滿，系統停止受理預約登記！");
-                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次 680 位名額已全數額滿，系統已自動關閉受理！</p></div></div>`;
+                document.body.innerHTML = `<div class="container my-5 text-center"><div class="alert alert-danger py-5"><h3>【額滿通知】</h3><p class="fs-5">本場次名額已全數額滿，系統已自動關閉受理！</p></div></div>`;
             } else if (data.result === "success") {
                 mainContent.style.display = 'none';
                 successCard.style.display = 'block';
